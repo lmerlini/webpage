@@ -38,9 +38,8 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import CardContent from "./CardContent.vue";
-
 onMounted(() => {
-	fetch("../../data.json")
+	fetch("./data.json")
 		.then((res) => res.json())
 		.then((result) => {
 			dataJson.value = result;
