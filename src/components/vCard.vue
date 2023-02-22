@@ -22,7 +22,7 @@
 				<card-content
 					v-for="(data, index) in dataJson"
 					:key="index"
-					:icon="`/src/${data.icon}`"
+					:icon="`${data.icon}`"
 					:title="data.category"
 					:score="data.score"
 					@update:score="updateScore"
