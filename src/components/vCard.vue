@@ -9,11 +9,12 @@
 					<span class="score__to">of 100</span>
 				</div>
 
-				<div class="congrats">
-					<h1 class="great">Great</h1>
+				<div class="congrats" v-if="score">
+					<h1 class="great">
+						{{ resultCongrants }}
+					</h1>
 					<p class="text-congrats">
-						You scored higher than 65% of the people who have taken
-						these tests.
+						{{ resultFormat }}
 					</p>
 				</div>
 			</div>
@@ -36,7 +37,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, computed } from "vue";
 import CardContent from "./CardContent.vue";
 onMounted(() => {
 	fetch("./data.json")
@@ -55,6 +56,15 @@ const dataJson = ref(null);
 function updateScore(data) {
 	score.value = data.score;
 }
+const resultFormat = computed(() => {
+	return score.value > 60
+		? "You scored higher than 65% of the people who have taken these tests."
+		: "Sorry you can do it again!!!";
+});
+
+const resultCongrants = computed(() => {
+	return score.value > 60 ? "Great" : "Ooops";
+});
 
 components: {
 	CardContent;
